@@ -1,4 +1,7 @@
-#install.packages("raster") # install 
+#install.packages("IM") # install 
+library(IM)
+library(raster)
+
 setwd("V:\\_downloads\\GitHub\\Image_Mean\\")
 
 #Scan directory and store filenames in string, then count total files
@@ -16,6 +19,9 @@ for (i in 2:n){
 #Calculate mean and write TIF
 m_image_tiff <- (m_image_tiff/n)
 writeTIFF(m_image_tiff,"./mean/mean_tiff.tif",bits.per.sample=16L)
+#Histo Eq
+m_image_tiff <- histeq(m_image_tiff)
+writeTIFF(m_image_tiff,"./mean/mean_tiff_he.tif",bits.per.sample=16L)
 
 #Read mean tif, then compare to in-memory
 test_tiff <- readTIFF("./mean/mean_tiff.tif")

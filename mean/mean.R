@@ -17,7 +17,7 @@ for (i in 2:n){
 m_image_tiff <- (m_image_tiff/n)
 writeTIFF(m_image_tiff,"./mean/mean_tiff.tif",bits.per.sample=16L)
 
-#Compare in-memory and written outputs
+#Read mean tif, then compare to in-memory
 test_tiff <- readTIFF("./mean/mean_tiff.tif")
 test_tiff[1,1,1]
 test_tiff[1,1,2]

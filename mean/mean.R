@@ -1,6 +1,9 @@
-#install.packages("IM") # install 
+install.packages("RStoolbox") # install 
 library(IM)
+library(tiff)
+library(RStoolbox)
 library(raster)
+library(plotly)
 
 setwd("V:\\_downloads\\GitHub\\Image_Mean\\")
 
@@ -20,7 +23,9 @@ for (i in 2:n){
 m_image_tiff <- (m_image_tiff/n)
 writeTIFF(m_image_tiff,"./mean/mean_tiff.tif",bits.per.sample=16L)
 #Histo Eq
-m_image_tiff <- histeq(m_image_tiff)
+#m_image_tiff <- histeq(m_image_tiff) #using raster package
+m_image_tiff <- ggRGB(m_image_tiff, stretch = "hist") #using RStoolbox
+
 writeTIFF(m_image_tiff,"./mean/mean_tiff_he.tif",bits.per.sample=16L)
 
 #Read mean tif, then compare to in-memory
